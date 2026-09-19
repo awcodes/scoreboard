@@ -1,11 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "awcodes/scoreboard",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Every NCAA FBS game for the week, with live scores, kickoff times, TV networks, records and AP rankings.",
     "keywords": [
         "laravel",
-        "framework"
+        "livewire",
+        "college-football",
+        "ncaa",
+        "fbs",
+        "scoreboard",
+        "collegefootballdata",
+        "awcodes"
     ],
     "license": "MIT",
     "require": {
