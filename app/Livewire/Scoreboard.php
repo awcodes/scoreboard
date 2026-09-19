@@ -106,6 +106,14 @@ final class Scoreboard extends Component
         return ($this->week?->url() ?? url('/')).$this->queryString(['status' => $status]);
     }
 
+    /**
+     * Current view with the team search removed, keeping the other filters.
+     */
+    public function clearSearchUrl(): string
+    {
+        return ($this->week?->url() ?? url('/')).$this->queryString(['q' => '']);
+    }
+
     public function render()
     {
         return view('livewire.scoreboard')

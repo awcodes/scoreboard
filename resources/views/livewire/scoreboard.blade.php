@@ -89,16 +89,39 @@
 
                 <div class="flex w-full items-center gap-2 sm:w-auto">
                     <label for="search" class="sr-only">Search teams</label>
-                    <input
-                        id="search"
-                        type="search"
-                        name="q"
-                        value="{{ $search }}"
-                        placeholder="Search teams"
-                        autocomplete="off"
-                        wire:model.live.debounce.250ms="search"
-                        class="border-line bg-control text-fg placeholder:text-faint min-w-0 flex-1 rounded border px-2 py-1.5 text-sm sm:w-44 sm:flex-none"
-                    />
+                    <div class="relative min-w-0 flex-1 sm:w-44 sm:flex-none">
+                        <input
+                            id="search"
+                            type="search"
+                            name="q"
+                            value="{{ $search }}"
+                            placeholder="Search teams"
+                            autocomplete="off"
+                            wire:model.live.debounce.250ms="search"
+                            class="border-line bg-control text-fg placeholder:text-faint w-full rounded border py-1.5 pr-8 pl-2 text-sm"
+                        />
+
+                        @if ($search !== '')
+                            <a
+                                href="{{ $this->clearSearchUrl() }}"
+                                wire:click.prevent="$set('search', '')"
+                                class="text-faint hover:text-fg absolute inset-y-0 right-0 flex w-8 items-center justify-center rounded"
+                                aria-label="Clear search"
+                            >
+                                <svg
+                                    class="size-3.5"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M18 6 6 18M6 6l12 12" />
+                                </svg>
+                            </a>
+                        @endif
+                    </div>
 
                     <label for="conference" class="sr-only">Conference</label>
                     <select

@@ -104,6 +104,22 @@ it('searches teams', function (): void {
         ->assertSeeText('No games match these filters.');
 });
 
+it('offers a clear-search link that keeps the other filters', function (): void {
+    get('/2026/3?status=final')->assertDontSee('Clear search');
+
+    get('/2026/3?status=final&q=clemson')
+        ->assertSee('aria-label="Clear search"', false)
+        ->assertSee('href="'.url('/2026/3').'?status=final"', false);
+
+    Livewire::test(Scoreboard::class, ['season' => 2026, 'week' => '3'])
+        ->set('search', 'clemson')
+        ->assertSee('Clear search')
+        ->assertDontSeeText('Georgia Southern')
+        ->set('search', '')
+        ->assertDontSee('Clear search')
+        ->assertSeeText('Georgia Southern');
+});
+
 it('searches from the query string without JavaScript', function (): void {
     get('/2026/3?q=clemson')
         ->assertSeeText('Austin Peay')
