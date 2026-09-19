@@ -30,7 +30,7 @@
                 {{ $week?->label() ?? 'Scoreboard' }}
             </h1>
 
-            <div class="justify-self-end">
+            <div class="flex items-center gap-2 justify-self-end">
                 @if ($next = $this->nextWeek)
                     <a
                         href="{{ $this->weekUrl($next) }}"
@@ -44,6 +44,8 @@
                         <span aria-hidden="true">›</span>
                     </a>
                 @endif
+
+                <x-theme-toggle class="-mr-1.5" />
             </div>
         </nav>
     </header>

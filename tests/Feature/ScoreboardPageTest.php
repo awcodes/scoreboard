@@ -121,3 +121,20 @@ it('explains how to sync when there is no data', function (): void {
 
     get('/')->assertOk()->assertSeeText('php artisan cfbd:sync');
 });
+
+it('renders a theme toggle that defaults to the system preference', function (): void {
+    get('/2026/3')
+        ->assertSee('data-theme-toggle', false)
+        ->assertSeeInOrder(['Theme: system. Switch to light.', 'Theme: light. Switch to dark.', 'Theme: dark. Switch to system.'])
+        ->assertSee("localStorage.getItem('theme')", false)
+        // The server never forces a theme; until the viewer picks one the CSS follows the system.
+        ->assertDontSee('data-theme="', false);
+});
+
+it('loads Fathom analytics only in production', function (): void {
+    get('/2026/3')->assertDontSee('cdn.usefathom.com', false);
+
+    app()->detectEnvironment(fn (): string => 'production');
+
+    get('/2026/3')->assertSee('<script src="https://cdn.usefathom.com/script.js" data-site="NXXPZQWR" data-spa="auto" defer></script>', false);
+});
