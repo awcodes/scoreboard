@@ -133,3 +133,12 @@ it('combines search with the other filters', function (): void {
     expect((new WeekScoreboard($this->week3))->filtered(GameStatus::Final, search: 'georgia')->pluck('id')->all())
         ->toBe([$final->id]);
 });
+
+it('summarizes the week, omitting empty states', function (): void {
+    expect((new WeekScoreboard($this->week3))->summary())->toBe('No FBS games');
+
+    Game::factory()->between($this->georgia, $this->tennessee)->final(34, 20)->create(['week' => 3]);
+    Game::factory()->between($this->georgia, $this->peay)->create(['week' => 3, 'start_at' => '2026-09-12 23:00:00']);
+
+    expect((new WeekScoreboard($this->week3))->summary())->toBe('1 final · 1 upcoming');
+});

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
@@ -21,6 +25,11 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Surface N+1 queries (e.g. a relation missing from `with()`) outside production.
+        Model::preventLazyLoading(! $this->app->isProduction());
+
+        Date::use(CarbonImmutable::class);
+
+        URL::forceScheme('https');
     }
 }

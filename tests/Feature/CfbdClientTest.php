@@ -34,6 +34,14 @@ it('retries rate limiting and server errors before failing', function (): void {
     Http::assertSentCount(3);
 });
 
+it('retries and reports connection failures', function (): void {
+    fakeCfbd(['/calendar' => Http::failedConnection()]);
+
+    expect(fn () => app(CfbdClient::class)->calendar(2026))->toThrow(CfbdException::class, 'Could not reach CFBD');
+
+    Http::assertSentCount(3);
+});
+
 it('rejects a response that is not a list', function (): void {
     fakeCfbd(['/calendar' => ['message' => 'oops']]);
 

@@ -40,6 +40,7 @@ return [
     'cfbd' => [
         'key' => env('CFBD_API_KEY'),
         'base_url' => env('CFBD_BASE_URL', 'https://api.collegefootballdata.com'),
+        'connect_timeout' => (int) env('CFBD_CONNECT_TIMEOUT', 5),
         'timeout' => (int) env('CFBD_TIMEOUT', 20),
 
         // Minutes between /scoreboard requests while games are in progress.

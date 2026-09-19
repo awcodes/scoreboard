@@ -1,6 +1,4 @@
 @php
-    use App\Enums\GameStatus;
-
     $week = $this->week;
     $board = $this->board;
     $filters = ['all' => 'All', 'live' => 'Live', 'final' => 'Final', 'upcoming' => 'Upcoming'];
@@ -13,7 +11,7 @@
             class="mx-auto grid h-12 max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 text-sm"
         >
             <div class="justify-self-start">
-                @if ($prev = $week?->previous())
+                @if ($prev = $this->previousWeek)
                     <a
                         href="{{ $this->weekUrl($prev) }}"
                         wire:navigate
@@ -33,7 +31,7 @@
             </h1>
 
             <div class="justify-self-end">
-                @if ($next = $week?->next())
+                @if ($next = $this->nextWeek)
                     <a
                         href="{{ $this->weekUrl($next) }}"
                         wire:navigate
@@ -59,20 +57,7 @@
             <div class="py-3 text-center">
                 <p class="text-muted text-sm">{{ $week->dateRange() }}</p>
 
-                @php($counts = $board->counts())
-                <p class="text-faint mt-0.5 text-xs" aria-live="polite">
-                    @if ($board->games->isEmpty())
-                        No FBS games
-                    @else
-                        {{
-                            collect([
-                                $counts[GameStatus::InProgress->value] ? $counts[GameStatus::InProgress->value].' live' : null,
-                                $counts[GameStatus::Final->value] ? $counts[GameStatus::Final->value].' final' : null,
-                                $counts[GameStatus::Scheduled->value] ? $counts[GameStatus::Scheduled->value].' upcoming' : null,
-                            ])->filter()->implode(' · ')
-                        }}
-                    @endif
-                </p>
+                <p class="text-faint mt-0.5 text-xs" aria-live="polite">{{ $board->summary() }}</p>
             </div>
 
             <form

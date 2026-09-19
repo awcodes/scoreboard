@@ -148,6 +148,7 @@ final class CfbdClient
         return Http::baseUrl(config('services.cfbd.base_url'))
             ->withToken($key)
             ->acceptJson()
+            ->connectTimeout(config('services.cfbd.connect_timeout'))
             ->timeout(config('services.cfbd.timeout'))
             ->retry(
                 times: 3,

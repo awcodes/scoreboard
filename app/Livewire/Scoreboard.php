@@ -19,6 +19,8 @@ use Livewire\Component;
  * @property-read WeekScoreboard|null $board
  * @property-read Collection<int, Game> $games
  * @property-read bool $polling
+ * @property-read SeasonWeek|null $previousWeek
+ * @property-read SeasonWeek|null $nextWeek
  */
 final class Scoreboard extends Component
 {
@@ -49,6 +51,18 @@ final class Scoreboard extends Component
     public function week(): ?SeasonWeek
     {
         return $this->weekId ? SeasonWeek::find($this->weekId) : null;
+    }
+
+    #[Computed]
+    public function previousWeek(): ?SeasonWeek
+    {
+        return $this->week?->previous();
+    }
+
+    #[Computed]
+    public function nextWeek(): ?SeasonWeek
+    {
+        return $this->week?->next();
     }
 
     #[Computed]

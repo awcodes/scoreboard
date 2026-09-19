@@ -59,6 +59,27 @@ final class WeekScoreboard
     }
 
     /**
+     * "12 live · 37 final · 16 upcoming", omitting empty states.
+     */
+    public function summary(): string
+    {
+        if ($this->games->isEmpty()) {
+            return 'No FBS games';
+        }
+
+        $counts = $this->counts();
+
+        return collect([
+            GameStatus::InProgress->value => 'live',
+            GameStatus::Final->value => 'final',
+            GameStatus::Scheduled->value => 'upcoming',
+        ])
+            ->filter(fn (string $label, string $status): bool => $counts[$status] > 0)
+            ->map(fn (string $label, string $status): string => "{$counts[$status]} {$label}")
+            ->implode(' · ');
+    }
+
+    /**
      * Conferences of the FBS teams playing this week.
      *
      * @return list<string>
