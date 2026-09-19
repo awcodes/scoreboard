@@ -1,0 +1,179 @@
+[
+  {
+    "season": 2026,
+    "seasonType": "regular",
+    "week": 1,
+    "polls": [
+      {
+        "poll": "AP Top 25",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 5,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1250
+          },
+          {
+            "rank": 15,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 750
+          },
+          {
+            "rank": 9,
+            "teamId": 228,
+            "school": "Clemson",
+            "conference": "ACC",
+            "firstPlaceVotes": 0,
+            "points": 1050
+          }
+        ]
+      },
+      {
+        "poll": "Coaches Poll",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 1,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1450
+          },
+          {
+            "rank": 2,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1400
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "season": 2026,
+    "seasonType": "regular",
+    "week": 2,
+    "polls": [
+      {
+        "poll": "AP Top 25",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 5,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1250
+          },
+          {
+            "rank": 15,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 750
+          },
+          {
+            "rank": 9,
+            "teamId": 228,
+            "school": "Clemson",
+            "conference": "ACC",
+            "firstPlaceVotes": 0,
+            "points": 1050
+          }
+        ]
+      },
+      {
+        "poll": "Coaches Poll",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 1,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1450
+          },
+          {
+            "rank": 2,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1400
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "season": 2026,
+    "seasonType": "regular",
+    "week": 3,
+    "polls": [
+      {
+        "poll": "AP Top 25",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 4,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1300
+          },
+          {
+            "rank": 17,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 650
+          },
+          {
+            "rank": 9,
+            "teamId": 228,
+            "school": "Clemson",
+            "conference": "ACC",
+            "firstPlaceVotes": 0,
+            "points": 1050
+          }
+        ]
+      },
+      {
+        "poll": "Coaches Poll",
+        "isFinal": null,
+        "ranks": [
+          {
+            "rank": 1,
+            "teamId": 61,
+            "school": "Georgia",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1450
+          },
+          {
+            "rank": 2,
+            "teamId": 2633,
+            "school": "Tennessee",
+            "conference": "SEC",
+            "firstPlaceVotes": 0,
+            "points": 1400
+          }
+        ]
+      }
+    ]
+  }
+]

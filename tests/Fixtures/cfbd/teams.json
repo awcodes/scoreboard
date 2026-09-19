@@ -1,0 +1,287 @@
+[
+  {
+    "id": 61,
+    "school": "Georgia",
+    "mascot": "Bulldogs",
+    "abbreviation": "UGA",
+    "alternateNames": [
+      "Georgia",
+      "UGA"
+    ],
+    "conference": "SEC",
+    "division": null,
+    "classification": "fbs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/61.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 2633,
+    "school": "Tennessee",
+    "mascot": "Volunteers",
+    "abbreviation": "TENN",
+    "alternateNames": [
+      "Tennessee",
+      "TENN"
+    ],
+    "conference": "SEC",
+    "division": null,
+    "classification": "fbs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/2633.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 290,
+    "school": "Georgia Southern",
+    "mascot": "Eagles",
+    "abbreviation": "GASO",
+    "alternateNames": [
+      "Georgia Southern",
+      "GASO"
+    ],
+    "conference": "Sun Belt",
+    "division": null,
+    "classification": "fbs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/290.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/290.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 2026,
+    "school": "App State",
+    "mascot": "Mountaineers",
+    "abbreviation": "APP",
+    "alternateNames": [
+      "App State",
+      "APP"
+    ],
+    "conference": "Sun Belt",
+    "division": null,
+    "classification": "fbs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/2026.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/2026.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 228,
+    "school": "Clemson",
+    "mascot": "Tigers",
+    "abbreviation": "CLEM",
+    "alternateNames": [
+      "Clemson",
+      "CLEM"
+    ],
+    "conference": "ACC",
+    "division": null,
+    "classification": "fbs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/228.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 2046,
+    "school": "Austin Peay",
+    "mascot": "Governors",
+    "abbreviation": "PEAY",
+    "alternateNames": [
+      "Austin Peay",
+      "PEAY"
+    ],
+    "conference": "UAC",
+    "division": null,
+    "classification": "fcs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/2046.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/2046.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 79,
+    "school": "Samford",
+    "mascot": "Bulldogs",
+    "abbreviation": "SAM",
+    "alternateNames": [
+      "Samford",
+      "SAM"
+    ],
+    "conference": "SoCon",
+    "division": null,
+    "classification": "fcs",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": [
+      "http://a.espncdn.com/i/teamlogos/ncaa/500/79.png",
+      "http://a.espncdn.com/i/teamlogos/ncaa/500-dark/79.png"
+    ],
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  },
+  {
+    "id": 2433,
+    "school": "Valdosta State",
+    "mascot": "Blazers",
+    "abbreviation": "VAL",
+    "alternateNames": [
+      "Valdosta State",
+      "VAL"
+    ],
+    "conference": "Gulf South",
+    "division": null,
+    "classification": "ii",
+    "color": "#000000",
+    "alternateColor": "#ffffff",
+    "logos": null,
+    "twitter": null,
+    "location": {
+      "id": 1,
+      "name": "Stadium",
+      "city": "City",
+      "state": "ST",
+      "zip": "00000",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "latitude": 0,
+      "longitude": 0,
+      "elevation": null,
+      "capacity": 50000,
+      "constructionYear": 1950,
+      "grass": true,
+      "dome": false
+    }
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "patronLevel": 0,
+  "tierName": "Free",
+  "monthlyLimit": 1000,
+  "remainingCalls": 1000,
+  "usedCalls": 0,
+  "resetAt": "2026-10-01T00:00:00.000Z",
+  "sharedPool": true,
+  "products": [
+    "cfb",
+    "cbb"
+  ],
+  "features": {
+    "adjustedMetrics": false,
+    "weather": false,
+    "scoreboard": false,
+    "livePlayByPlay": false,
+    "graphQl": false
+  }
+}

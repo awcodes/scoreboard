@@ -1,0 +1,198 @@
+[
+  {
+    "id": 401800003,
+    "startDate": "2026-09-12T04:00:00.000Z",
+    "startTimeTBD": true,
+    "tv": "ACC Network",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "in_progress",
+    "period": 3,
+    "clock": "04:32",
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "state": "GA",
+      "city": "Athens",
+      "name": "Memorial Stadium"
+    },
+    "homeTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 21,
+      "classification": "fbs",
+      "conference": "ACC",
+      "name": "Clemson",
+      "id": 228
+    },
+    "awayTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 17,
+      "classification": "fcs",
+      "conference": "UAC",
+      "name": "Austin Peay",
+      "id": 2046
+    },
+    "weather": {
+      "windDirection": null,
+      "windSpeed": null,
+      "description": null,
+      "temperature": null
+    },
+    "betting": {
+      "awayMoneyline": null,
+      "homeMoneyline": null,
+      "overUnder": null,
+      "spread": null
+    }
+  },
+  {
+    "id": 401800001,
+    "startDate": "2026-09-12T19:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ABC",
+    "neutralSite": false,
+    "conferenceGame": true,
+    "status": "completed",
+    "period": 4,
+    "clock": "00:00",
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "state": "GA",
+      "city": "Athens",
+      "name": "Sanford Stadium"
+    },
+    "homeTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 34,
+      "classification": "fbs",
+      "conference": "SEC",
+      "name": "Georgia",
+      "id": 61
+    },
+    "awayTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 20,
+      "classification": "fbs",
+      "conference": "SEC",
+      "name": "Tennessee",
+      "id": 2633
+    },
+    "weather": {
+      "windDirection": null,
+      "windSpeed": null,
+      "description": null,
+      "temperature": null
+    },
+    "betting": {
+      "awayMoneyline": null,
+      "homeMoneyline": null,
+      "overUnder": null,
+      "spread": null
+    }
+  },
+  {
+    "id": 401800004,
+    "startDate": "2026-09-12T23:00:00.000Z",
+    "startTimeTBD": false,
+    "tv": null,
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "scheduled",
+    "period": null,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "state": "GA",
+      "city": "Athens",
+      "name": "Stadium"
+    },
+    "homeTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": null,
+      "classification": "fcs",
+      "conference": "SoCon",
+      "name": "Samford",
+      "id": 79
+    },
+    "awayTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": null,
+      "classification": "fcs",
+      "conference": "UAC",
+      "name": "Austin Peay",
+      "id": 2046
+    },
+    "weather": {
+      "windDirection": null,
+      "windSpeed": null,
+      "description": null,
+      "temperature": null
+    },
+    "betting": {
+      "awayMoneyline": null,
+      "homeMoneyline": null,
+      "overUnder": null,
+      "spread": null
+    }
+  },
+  {
+    "id": 409999999,
+    "startDate": "2026-09-10T23:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ESPN+",
+    "neutralSite": false,
+    "conferenceGame": true,
+    "status": "completed",
+    "period": 4,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "state": "GA",
+      "city": "Athens",
+      "name": "Paulson Stadium"
+    },
+    "homeTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 31,
+      "classification": "fbs",
+      "conference": "Sun Belt",
+      "name": "Georgia Southern",
+      "id": 290
+    },
+    "awayTeam": {
+      "winProbability": null,
+      "lineScores": null,
+      "points": 24,
+      "classification": "fbs",
+      "conference": "Sun Belt",
+      "name": "App State",
+      "id": 2026
+    },
+    "weather": {
+      "windDirection": null,
+      "windSpeed": null,
+      "description": null,
+      "temperature": null
+    },
+    "betting": {
+      "awayMoneyline": null,
+      "homeMoneyline": null,
+      "overUnder": null,
+      "spread": null
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "patronLevel": 3,
+  "tierName": "Tier 3",
+  "monthlyLimit": 75000,
+  "remainingCalls": 74200,
+  "usedCalls": 800,
+  "resetAt": "2026-10-01T00:00:00.000Z",
+  "sharedPool": false,
+  "products": [],
+  "features": {
+    "adjustedMetrics": true,
+    "weather": true,
+    "scoreboard": true,
+    "livePlayByPlay": false,
+    "graphQl": false
+  }
+}

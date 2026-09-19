@@ -1,0 +1,432 @@
+[
+  {
+    "id": 401869940,
+    "startDate": "2026-09-19T15:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "CBSSN",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "in_progress",
+    "period": 2,
+    "clock": "07:08",
+    "situation": "1st & 10 at DEL 49",
+    "possession": "home",
+    "lastPlay": "(07:38) No Huddle-Shotgun #4 N.Minicucci pass complete short middle to #18 S.Wilson caught at DEL46, for 16 yards to the DEL49 (#16 J.Powell II), 1ST DOWN",
+    "venue": {
+      "name": "Delaware Stadium",
+      "city": "Newark",
+      "state": "DE"
+    },
+    "homeTeam": {
+      "id": 48,
+      "name": "Delaware Blue Hens",
+      "conference": "Conference USA",
+      "classification": "fbs",
+      "points": 7,
+      "lineScores": [
+        0,
+        7
+      ],
+      "winProbability": 0.385
+    },
+    "awayTeam": {
+      "id": 324,
+      "name": "Coastal Carolina Chanticleers",
+      "conference": "Sun Belt",
+      "classification": "fbs",
+      "points": 14,
+      "lineScores": [
+        7,
+        7
+      ],
+      "winProbability": 0.615
+    },
+    "weather": {
+      "temperature": 73.8,
+      "description": "Clear",
+      "windSpeed": 6.5,
+      "windDirection": 73
+    },
+    "betting": {
+      "spread": -5.5,
+      "overUnder": 56.5,
+      "homeMoneyline": -210,
+      "awayMoneyline": 175
+    }
+  },
+  {
+    "id": 401856686,
+    "startDate": "2026-09-19T16:00:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ABC",
+    "neutralSite": false,
+    "conferenceGame": true,
+    "status": "in_progress",
+    "period": 1,
+    "clock": "04:47",
+    "situation": null,
+    "possession": null,
+    "lastPlay": "Timeout Arkansas, clock 04:47",
+    "venue": {
+      "name": "Razorback Stadium",
+      "city": "Fayetteville",
+      "state": "AR"
+    },
+    "homeTeam": {
+      "id": 8,
+      "name": "Arkansas Razorbacks",
+      "conference": "SEC",
+      "classification": "fbs",
+      "points": 0,
+      "lineScores": [
+        0
+      ],
+      "winProbability": 0.275
+    },
+    "awayTeam": {
+      "id": 61,
+      "name": "Georgia Bulldogs",
+      "conference": "SEC",
+      "classification": "fbs",
+      "points": 7,
+      "lineScores": [
+        7
+      ],
+      "winProbability": 0.725
+    },
+    "weather": {
+      "temperature": 86.9,
+      "description": "Cloudy",
+      "windSpeed": 10.8,
+      "windDirection": 216
+    },
+    "betting": {
+      "spread": 24.5,
+      "overUnder": 55,
+      "homeMoneyline": 1100,
+      "awayMoneyline": -3300
+    }
+  },
+  {
+    "id": 401856792,
+    "startDate": "2026-09-19T16:00:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ESPN2",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "in_progress",
+    "period": 1,
+    "clock": "05:21",
+    "situation": null,
+    "possession": null,
+    "lastPlay": "Timeout Kansas State, clock 05:21",
+    "venue": {
+      "name": "Bill Snyder Family Stadium",
+      "city": "Manhattan",
+      "state": "KS"
+    },
+    "homeTeam": {
+      "id": 2306,
+      "name": "Kansas State Wildcats",
+      "conference": "Big 12",
+      "classification": "fbs",
+      "points": 0,
+      "lineScores": [
+        0
+      ],
+      "winProbability": 0.356
+    },
+    "awayTeam": {
+      "id": 2655,
+      "name": "Tulane Green Wave",
+      "conference": "American Athletic",
+      "classification": "fbs",
+      "points": 7,
+      "lineScores": [
+        7
+      ],
+      "winProbability": 0.644
+    },
+    "weather": {
+      "temperature": 86.2,
+      "description": "Fair",
+      "windSpeed": 11.4,
+      "windDirection": 216
+    },
+    "betting": {
+      "spread": -20.5,
+      "overUnder": 49.5,
+      "homeMoneyline": -1300,
+      "awayMoneyline": 725
+    }
+  },
+  {
+    "id": 401858225,
+    "startDate": "2026-09-17T23:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ESPN",
+    "neutralSite": false,
+    "conferenceGame": true,
+    "status": "completed",
+    "period": null,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": "End of 4th quarter.",
+    "venue": {
+      "name": "Acrisure Stadium",
+      "city": "Pittsburgh",
+      "state": "PA"
+    },
+    "homeTeam": {
+      "id": 221,
+      "name": "Pittsburgh Panthers",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": 27,
+      "lineScores": [
+        7,
+        10,
+        7,
+        3
+      ],
+      "winProbability": null
+    },
+    "awayTeam": {
+      "id": 183,
+      "name": "Syracuse Orange",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": 13,
+      "lineScores": [
+        0,
+        10,
+        0,
+        3
+      ],
+      "winProbability": null
+    },
+    "weather": {
+      "temperature": 77.5,
+      "description": "Overcast",
+      "windSpeed": 9.9,
+      "windDirection": 290
+    },
+    "betting": {
+      "spread": -11,
+      "overUnder": 51.5,
+      "homeMoneyline": -450,
+      "awayMoneyline": 335
+    }
+  },
+  {
+    "id": 401858226,
+    "startDate": "2026-09-18T23:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ESPN",
+    "neutralSite": false,
+    "conferenceGame": true,
+    "status": "completed",
+    "period": null,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": "G. Lopez pass incomplete, Wake Forest Penalty, holding in the endzone for a SAFETY (T. Olajide)",
+    "venue": {
+      "name": "Allegacy Federal Credit Union Stadium",
+      "city": "Winston-Salem",
+      "state": "NC"
+    },
+    "homeTeam": {
+      "id": 154,
+      "name": "Wake Forest Demon Deacons",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": 20,
+      "lineScores": [
+        7,
+        0,
+        6,
+        7
+      ],
+      "winProbability": null
+    },
+    "awayTeam": {
+      "id": 2390,
+      "name": "Miami Hurricanes",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": 33,
+      "lineScores": [
+        7,
+        17,
+        7,
+        2
+      ],
+      "winProbability": null
+    },
+    "weather": {
+      "temperature": 77.4,
+      "description": "Heavy Rain",
+      "windSpeed": 3.4,
+      "windDirection": 278
+    },
+    "betting": {
+      "spread": 20,
+      "overUnder": 56,
+      "homeMoneyline": 900,
+      "awayMoneyline": -1900
+    }
+  },
+  {
+    "id": 401858460,
+    "startDate": "2026-09-19T16:30:00.000Z",
+    "startTimeTBD": false,
+    "tv": "Peacock",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "scheduled",
+    "period": null,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "name": "Camp Randall Stadium",
+      "city": "Madison",
+      "state": "WI"
+    },
+    "homeTeam": {
+      "id": 275,
+      "name": "Wisconsin Badgers",
+      "conference": "Big Ten",
+      "classification": "fbs",
+      "points": null,
+      "lineScores": null,
+      "winProbability": null
+    },
+    "awayTeam": {
+      "id": 2199,
+      "name": "Eastern Michigan Eagles",
+      "conference": "Mid-American",
+      "classification": "fbs",
+      "points": null,
+      "lineScores": null,
+      "winProbability": null
+    },
+    "weather": {
+      "temperature": 74.1,
+      "description": "Light Rain",
+      "windSpeed": 8.9,
+      "windDirection": 227
+    },
+    "betting": {
+      "spread": -23.5,
+      "overUnder": 44,
+      "homeMoneyline": -3300,
+      "awayMoneyline": 1100
+    }
+  },
+  {
+    "id": 401856695,
+    "startDate": "2026-09-19T16:45:00.000Z",
+    "startTimeTBD": false,
+    "tv": "SEC Network",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "scheduled",
+    "period": null,
+    "clock": null,
+    "situation": null,
+    "possession": null,
+    "lastPlay": null,
+    "venue": {
+      "name": "FirstBank Stadium",
+      "city": "Nashville",
+      "state": "TN"
+    },
+    "homeTeam": {
+      "id": 238,
+      "name": "Vanderbilt Commodores",
+      "conference": "SEC",
+      "classification": "fbs",
+      "points": null,
+      "lineScores": null,
+      "winProbability": null
+    },
+    "awayTeam": {
+      "id": 152,
+      "name": "NC State Wolfpack",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": null,
+      "lineScores": null,
+      "winProbability": null
+    },
+    "weather": {
+      "temperature": 93.9,
+      "description": "Clear",
+      "windSpeed": 2.5,
+      "windDirection": 269
+    },
+    "betting": {
+      "spread": -3,
+      "overUnder": 50.5,
+      "homeMoneyline": -185,
+      "awayMoneyline": 160
+    }
+  },
+  {
+    "id": 401858228,
+    "startDate": "2026-09-19T16:00:00.000Z",
+    "startTimeTBD": false,
+    "tv": "ACC Network | ACCNX",
+    "neutralSite": false,
+    "conferenceGame": false,
+    "status": "in_progress",
+    "period": 1,
+    "clock": "02:06",
+    "situation": "1st & 10 at MER 38",
+    "possession": "away",
+    "lastPlay": "(02:08) #47 A.Bacchetta punt 50 yards to the MU 38 fair catch by #9 B.Smith at MU 38",
+    "venue": {
+      "name": "Bobby Dodd Stadium",
+      "city": "Atlanta",
+      "state": "GA"
+    },
+    "homeTeam": {
+      "id": 59,
+      "name": "Georgia Tech Yellow Jackets",
+      "conference": "ACC",
+      "classification": "fbs",
+      "points": 7,
+      "lineScores": [
+        7
+      ],
+      "winProbability": 0.738
+    },
+    "awayTeam": {
+      "id": 2382,
+      "name": "Mercer Bears",
+      "conference": "Southern",
+      "classification": "fcs",
+      "points": 0,
+      "lineScores": [
+        0
+      ],
+      "winProbability": 0.262
+    },
+    "weather": {
+      "temperature": 89.1,
+      "description": "Clear",
+      "windSpeed": 2.9,
+      "windDirection": 58
+    },
+    "betting": {
+      "spread": -38.5,
+      "overUnder": 57.5,
+      "homeMoneyline": null,
+      "awayMoneyline": null
+    }
+  }
+]
