@@ -11,7 +11,8 @@ use App\Models\Game;
 
 /**
  * Applies live state (status, score, period, clock) from `/scoreboard` to
- * games already known locally.
+ * games already known locally, and flags games that are past kickoff but
+ * haven't started.
  */
 final readonly class SyncScoreboard
 {
@@ -51,6 +52,15 @@ final readonly class SyncScoreboard
             $game->network = $data->tv;
         }
 
+        $game->start_delayed = $this->isDelayed($data);
+
+        // The games sync assumes a game is live once kickoff passes. If the
+        // scoreboard says it hasn't started, and no live state has been
+        // recorded, put it back to scheduled so the delay can be shown.
+        if ($game->start_delayed && $game->status === GameStatus::InProgress && $game->period === null) {
+            $game->status = GameStatus::Scheduled;
+        }
+
         match ($data->status) {
             GameStatus::InProgress => $game->fill([
                 'status' => GameStatus::InProgress,
@@ -70,5 +80,12 @@ final readonly class SyncScoreboard
             // Never downgrade a live or final game back to scheduled.
             GameStatus::Scheduled => null,
         };
+    }
+
+    private function isDelayed(ScoreboardGameData $data): bool
+    {
+        return $data->status === GameStatus::Scheduled
+            && ! $data->startTimeTbd
+            && $data->startAt->lte(now()->subMinutes(Game::DELAYED_AFTER_MINUTES));
     }
 }

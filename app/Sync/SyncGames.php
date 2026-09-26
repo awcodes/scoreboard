@@ -77,6 +77,8 @@ final readonly class SyncGames
      */
     private function apply(Game $game, GameData $data, ?array $networks): void
     {
+        $this->trackReschedule($game, $data);
+
         $game->fill([
             'season' => $data->season,
             'season_type' => $data->seasonType,
@@ -105,19 +107,41 @@ final readonly class SyncGames
             $game->away_score = $data->away->points ?? $game->away_score;
             $game->clock = null;
             $game->completed_at ??= now();
-        } elseif ($this->kickedOff($data) || ($data->startTimeTbd && $game->status === GameStatus::InProgress)) {
+            $game->start_delayed = false;
+        } elseif (($this->kickedOff($data) && ! $game->start_delayed) || ($data->startTimeTbd && $game->status === GameStatus::InProgress)) {
             // /games has no live status, so a game past kickoff is assumed
             // to be under way. Period and clock come from the scoreboard sync.
             $game->status = GameStatus::InProgress;
             $game->home_score = $data->home->points ?? $game->home_score;
             $game->away_score = $data->away->points ?? $game->away_score;
         } else {
-            // Not started yet, rescheduled, or long overdue (likely postponed).
+            // Not started yet, rescheduled, delayed according to the
+            // scoreboard, or long overdue (likely postponed).
             $game->status = GameStatus::Scheduled;
         }
 
         $game->synced_at = now();
         $game->save();
+    }
+
+    /**
+     * Remembers the first announced kickoff when a game with a set time is
+     * moved, and forgets it if the game moves back.
+     */
+    private function trackReschedule(Game $game, GameData $data): void
+    {
+        $moved = $game->exists
+            && ! $game->start_time_tbd
+            && ($data->startTimeTbd || $game->start_at->ne($data->startAt));
+
+        if ($moved) {
+            $game->original_start_at ??= $game->start_at;
+            $game->start_delayed = false;
+        }
+
+        if (! $data->startTimeTbd && $game->original_start_at?->eq($data->startAt)) {
+            $game->original_start_at = null;
+        }
     }
 
     /**

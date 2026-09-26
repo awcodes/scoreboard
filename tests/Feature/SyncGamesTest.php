@@ -107,6 +107,44 @@ it('moves a rescheduled game back to scheduled', function (): void {
     expect(Game::firstWhere('provider_id', 401800004)->status)->toBe(GameStatus::Scheduled);
 });
 
+it('remembers the original kickoff when a game is moved', function (): void {
+    fakeCfbd();
+    artisan('cfbd:sync-games', ['--season' => 2026]);
+    Game::where('provider_id', 401800004)->update(['start_delayed' => true]);
+
+    $resync = function (string $startDate): Game {
+        $games = cfbdFixture('games-week3-fcs');
+        $games[1]['startDate'] = $startDate;
+        Http::swap(new Factory);
+        fakeCfbd(['/games' => $games]);
+        artisan('cfbd:sync-games', ['--season' => 2026]);
+
+        return Game::firstWhere('provider_id', 401800004);
+    };
+
+    $game = $resync('2026-09-13T17:00:00.000Z');
+    expect($game->original_start_at->toIso8601String())->toBe('2026-09-12T23:00:00+00:00')
+        ->and($game->start_delayed)->toBeFalse()
+        ->and($game->movedFromLabel())->toBe('Sat 7:00 PM');
+
+    // Moving again keeps the first announced kickoff.
+    expect($resync('2026-09-13T19:00:00.000Z')->original_start_at->toIso8601String())->toBe('2026-09-12T23:00:00+00:00')
+        ->and($resync('2026-09-12T23:00:00.000Z')->original_start_at)->toBeNull();
+});
+
+it('does not treat announcing a TBD kickoff time as a move', function (): void {
+    fakeCfbd();
+    artisan('cfbd:sync-games', ['--season' => 2026]);
+
+    $games = cfbdFixture('games-week3-fbs');
+    $games[2] = [...$games[2], 'startTimeTBD' => false, 'startDate' => '2026-09-12T23:30:00.000Z'];
+    Http::swap(new Factory);
+    fakeCfbd(['/games' => $games]);
+    artisan('cfbd:sync-games', ['--season' => 2026]);
+
+    expect(Game::firstWhere('provider_id', 401800003)->original_start_at)->toBeNull();
+});
+
 it('refreshes scores with a single call in --scores mode', function (): void {
     fakeCfbd();
 

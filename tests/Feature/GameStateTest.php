@@ -21,6 +21,16 @@ it('labels game states', function (array $attributes, string $label): void {
     'final in overtime' => [['status' => GameStatus::Final, 'period' => 5], 'Final/OT'],
 ]);
 
+it('only shows delays and moves for upcoming games', function (): void {
+    $moved = ['start_at' => '2026-09-13 17:00:00', 'original_start_at' => '2026-09-12 23:30:00'];
+
+    expect(Game::factory()->make(['start_delayed' => true])->isDelayed())->toBeTrue()
+        ->and(Game::factory()->make(['start_delayed' => true, 'status' => GameStatus::InProgress])->isDelayed())->toBeFalse()
+        ->and(Game::factory()->make($moved)->movedFromLabel())->toBe('Sat 7:30 PM')
+        ->and(Game::factory()->final(21, 14)->make($moved)->movedFromLabel())->toBeNull()
+        ->and(Game::factory()->make()->movedFromLabel())->toBeNull();
+});
+
 it('shows TV TBD when no network is known', function (): void {
     expect(Game::factory()->make()->networkLabel())->toBe('TV TBD')
         ->and(Game::factory()->make(['network' => 'ESPN'])->networkLabel())->toBe('ESPN');

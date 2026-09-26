@@ -31,6 +31,11 @@
                 <span class="sr-only">Live:</span>
             @endif
             {{ $game->stateLabel() }}
+            @if ($game->isDelayed())
+                <span class="text-live">· Delayed</span>
+            @elseif ($movedFrom = $game->movedFromLabel())
+                <span class="text-faint">· Was {{ $movedFrom }}</span>
+            @endif
         </span>
         <span class="truncate">{{ $game->networkLabel() }}</span>
     </div>

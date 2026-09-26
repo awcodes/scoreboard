@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Enums\GameStatus;
 use App\Models\Game;
+use Illuminate\Http\Client\Factory;
+use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\travelTo;
@@ -55,4 +57,43 @@ it('ignores scoreboard games that are not synced locally', function (): void {
     artisan('cfbd:sync-scoreboard')->expectsOutputToContain('Updated 2 games.');
 
     expect(Game::where('provider_id', 409999999)->exists())->toBeFalse();
+});
+
+it('shows a game as delayed when the scoreboard has not started it well past kickoff', function (): void {
+    travelTo('2026-09-12 23:20:00');
+    artisan('cfbd:sync-games', ['--season' => 2026]);
+    expect(Game::firstWhere('provider_id', 401800004)->status)->toBe(GameStatus::InProgress);
+
+    artisan('cfbd:sync-scoreboard');
+
+    $game = Game::firstWhere('provider_id', 401800004);
+    expect($game->status)->toBe(GameStatus::Scheduled)
+        ->and($game->isDelayed())->toBeTrue();
+
+    // The next games sync must not assume the delayed game kicked off.
+    artisan('cfbd:sync-games', ['--season' => 2026]);
+    expect(Game::firstWhere('provider_id', 401800004)->isDelayed())->toBeTrue();
+});
+
+it('does not flag a game as delayed shortly after kickoff', function (): void {
+    travelTo('2026-09-12 23:10:00');
+
+    artisan('cfbd:sync-scoreboard');
+
+    expect(Game::firstWhere('provider_id', 401800004)->start_delayed)->toBeFalse();
+});
+
+it('clears the delay once the game starts', function (): void {
+    travelTo('2026-09-12 23:40:00');
+    Game::where('provider_id', 401800004)->update(['start_delayed' => true]);
+
+    $scoreboard = cfbdFixture('scoreboard');
+    $scoreboard[2] = [...$scoreboard[2], 'status' => 'in_progress', 'period' => 1, 'clock' => '14:55'];
+    Http::swap(new Factory);
+    fakeCfbd(['/scoreboard' => $scoreboard]);
+    artisan('cfbd:sync-scoreboard');
+
+    $game = Game::firstWhere('provider_id', 401800004);
+    expect($game->status)->toBe(GameStatus::InProgress)
+        ->and($game->start_delayed)->toBeFalse();
 });

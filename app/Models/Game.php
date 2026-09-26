@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\GameStatus;
 use App\Enums\SeasonType;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Game extends Model
 {
     use HasFactory;
+
+    /**
+     * Minutes past kickoff before a game the scoreboard still reports as
+     * scheduled is shown as delayed. TV kickoffs routinely run a few
+     * minutes behind the listed time.
+     */
+    public const int DELAYED_AFTER_MINUTES = 15;
 
     protected $guarded = [];
 
@@ -85,9 +93,27 @@ final class Game extends Model
 
     public function kickoffLabel(): string
     {
-        $start = $this->start_at->copy()->setTimezone(config('app.display_timezone'));
+        return $this->formatKickoff($this->start_at, (bool) $this->start_time_tbd);
+    }
 
-        return $start->format('D').' '.($this->start_time_tbd ? 'TBD' : $start->format('g:i A'));
+    /**
+     * Past kickoff, but the live scoreboard says the game hasn't started.
+     */
+    public function isDelayed(): bool
+    {
+        return $this->status === GameStatus::Scheduled && $this->start_delayed;
+    }
+
+    /**
+     * The previously announced kickoff of an upcoming game that was moved.
+     */
+    public function movedFromLabel(): ?string
+    {
+        if ($this->status !== GameStatus::Scheduled || $this->original_start_at === null) {
+            return null;
+        }
+
+        return $this->formatKickoff($this->original_start_at, false);
     }
 
     public function networkLabel(): string
@@ -109,11 +135,20 @@ final class Game extends Model
             'status' => GameStatus::class,
             'start_at' => 'datetime',
             'start_time_tbd' => 'boolean',
+            'original_start_at' => 'datetime',
+            'start_delayed' => 'boolean',
             'neutral_site' => 'boolean',
             'conference_game' => 'boolean',
             'completed_at' => 'datetime',
             'synced_at' => 'datetime',
         ];
+    }
+
+    private function formatKickoff(CarbonInterface $at, bool $timeTbd): string
+    {
+        $start = $at->copy()->setTimezone(config('app.display_timezone'));
+
+        return $start->format('D').' '.($timeTbd ? 'TBD' : $start->format('g:i A'));
     }
 
     private function liveLabel(): string
