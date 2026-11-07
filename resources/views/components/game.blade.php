@@ -49,7 +49,7 @@
                         <span class="text-faint shrink-0 text-sm">({{ $side['record'] }})</span>
                     @endif
                     @if ($side['rank'])
-                        <span class="text-rank shrink-0 text-sm font-semibold"><span class="sr-only">AP rank </span>#{{ $side['rank'] }}</span>
+                        <span class="text-rank shrink-0 text-sm font-semibold"><span class="sr-only">Rank </span>#{{ $side['rank'] }}</span>
                     @endif
                 </p>
                 @if ($showScore)

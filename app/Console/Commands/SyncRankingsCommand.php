@@ -12,13 +12,13 @@ final class SyncRankingsCommand extends CfbdCommand
 
     protected $signature = 'cfbd:sync-rankings {--season= : Season year (defaults to the current season)}';
 
-    protected $description = 'Sync weekly AP Top 25 rankings from CFBD';
+    protected $description = 'Sync weekly AP Top 25 and CFP rankings from CFBD';
 
     public function handle(SyncRankings $sync): int
     {
         return $this->attempt(function () use ($sync): void {
             $count = $sync($this->season());
-            $this->info("Synced {$count} AP rankings.");
+            $this->info("Synced {$count} AP and CFP rankings.");
         });
     }
 }

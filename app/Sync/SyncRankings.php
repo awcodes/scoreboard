@@ -18,34 +18,42 @@ final readonly class SyncRankings
     ) {}
 
     /**
-     * Replace the season's stored AP rankings with the provider's full history.
+     * Replace the season's stored AP and CFP rankings with the provider's
+     * full history, from a single `/rankings` call.
      */
-    public function __invoke(int $season, Poll $poll = Poll::Ap): int
+    public function __invoke(int $season): int
     {
-        $ranks = collect($this->cfbd->rankings($season))
-            ->filter(fn (PollRankData $rank): bool => $rank->poll === $poll->providerName() && $rank->season === $season)
-            ->unique(fn (PollRankData $rank): string => "{$rank->seasonType->value}-{$rank->week}-{$rank->teamProviderId}");
+        $response = collect($this->cfbd->rankings($season));
+        $count = 0;
 
-        // An empty response would wipe history; treat it as "nothing new".
-        if ($ranks->isEmpty()) {
-            return 0;
+        foreach (Poll::cases() as $poll) {
+            $ranks = $response
+                ->filter(fn (PollRankData $rank): bool => $rank->poll === $poll->providerName() && $rank->season === $season)
+                ->unique(fn (PollRankData $rank): string => "{$rank->seasonType->value}-{$rank->week}-{$rank->teamProviderId}");
+
+            // An empty poll would wipe its history; treat it as "nothing new".
+            if ($ranks->isEmpty()) {
+                continue;
+            }
+
+            DB::transaction(function () use ($ranks, $season, $poll): void {
+                TeamRanking::where('season', $season)->where('poll', $poll)->delete();
+
+                foreach ($ranks as $rank) {
+                    TeamRanking::create([
+                        'team_id' => $this->teams->find($rank->teamProviderId, $rank->school)->id,
+                        'season' => $rank->season,
+                        'season_type' => $rank->seasonType,
+                        'week' => $rank->week,
+                        'poll' => $poll,
+                        'rank' => $rank->rank,
+                    ]);
+                }
+            });
+
+            $count += $ranks->count();
         }
 
-        DB::transaction(function () use ($ranks, $season, $poll): void {
-            TeamRanking::where('season', $season)->where('poll', $poll)->delete();
-
-            foreach ($ranks as $rank) {
-                TeamRanking::create([
-                    'team_id' => $this->teams->find($rank->teamProviderId, $rank->school)->id,
-                    'season' => $rank->season,
-                    'season_type' => $rank->seasonType,
-                    'week' => $rank->week,
-                    'poll' => $poll,
-                    'rank' => $rank->rank,
-                ]);
-            }
-        });
-
-        return $ranks->count();
+        return $count;
     }
 }

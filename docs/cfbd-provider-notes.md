@@ -25,6 +25,7 @@ The tier comes from Patreon, and the Patreon account must be linked to the CFBD 
 ## Confirmed
 
 - **Poll week numbering:** AP poll N is the ranking going into week N, and week 1 is the preseason poll. During week 3, polls 1–3 existed and poll 3 was the one released after week 2.
+- **CFP rankings:** `/rankings` includes them as poll `"Playoff Committee Rankings"` (25 teams), numbered like the AP poll. The first 2026 release (Tuesday, Nov 3) came back as regular-season week 10, alongside AP poll 10.
 - **TBD kickoffs:** `startTimeTBD=true` comes with a `startDate` of 04:00Z, which is midnight Eastern on the right day. The page shows "Sat TBD".
 - **Missing classifications:** a few lower-division opponents have `null` classification. They're stored, and hidden unless an FBS team is playing.
 

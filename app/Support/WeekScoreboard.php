@@ -191,27 +191,29 @@ final class WeekScoreboard
     }
 
     /**
-     * The AP poll in effect for this week: CFBD numbers each poll by the
-     * week it precedes, so week N uses the latest poll numbered N or lower.
-     * Postseason games use the last regular-season poll.
+     * The ranking in effect for this week: the CFP committee rankings once
+     * one has been released, otherwise the AP poll. CFBD numbers each
+     * release by the week it precedes, so week N uses the latest release
+     * numbered N or lower. Postseason games use the last regular-season one.
      *
      * @return array<int, int>
      */
     private function loadRanks(): array
     {
-        $polls = TeamRanking::query()
-            ->where('season', $this->week->season)
-            ->where('poll', Poll::Ap)
-            ->where('season_type', SeasonType::Regular)
-            ->when($this->week->season_type === SeasonType::Regular, fn ($q) => $q->where('week', '<=', $this->week->week));
+        foreach ([Poll::Cfp, Poll::Ap] as $poll) {
+            $releases = TeamRanking::query()
+                ->where('season', $this->week->season)
+                ->where('poll', $poll)
+                ->where('season_type', SeasonType::Regular)
+                ->when($this->week->season_type === SeasonType::Regular, fn ($q) => $q->where('week', '<=', $this->week->week));
 
-        $pollWeek = (clone $polls)->max('week');
+            $releaseWeek = (clone $releases)->max('week');
 
-        if ($pollWeek === null) {
-            return [];
+            if ($releaseWeek !== null) {
+                return $releases->where('week', $releaseWeek)->pluck('rank', 'team_id')->all();
+            }
         }
 
-        return $polls->where('week', $pollWeek)->pluck('rank', 'team_id')
-            ->all();
+        return [];
     }
 }

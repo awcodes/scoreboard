@@ -1,6 +1,6 @@
 # College Football Scoreboard
 
-Every NCAA Division I FBS game for a week, all on one page: scores, live state, kickoff times, TV, records and AP rankings. Rankings never affect which games are shown or their order. See `college-football-scoreboard-spec.md` for the full brief.
+Every NCAA Division I FBS game for a week, all on one page: scores, live state, kickoff times, TV, records and rankings (AP Top 25, then the CFP committee rankings once they're released). Rankings never affect which games are shown or their order. See `college-football-scoreboard-spec.md` for the full brief.
 
 Laravel 13, Livewire 4, Tailwind 4, SQLite, with data from [CollegeFootballData](https://collegefootballdata.com) (CFBD).
 
@@ -22,7 +22,7 @@ Then check what your key can do and load the season:
 
 ```sh
 php artisan cfbd:spike --week=3   # ~9 calls; saves raw responses to storage/app/cfbd-spike
-php artisan cfbd:sync             # calendar, teams, full-season games, AP rankings (~7 calls)
+php artisan cfbd:sync             # calendar, teams, full-season games, AP and CFP rankings (~7 calls)
 php artisan serve
 ```
 
@@ -40,7 +40,7 @@ To keep data current in production, run the scheduler from cron:
 | `cfbd:sync-calendar` | 1 | Season weeks (for week navigation and the current week) |
 | `cfbd:sync-teams` | 1 | FBS/FCS teams |
 | `cfbd:sync-games [--week=3\|post] [--current] [--scores] [--force]` | 3 (1 with `--scores`) | Schedule, kickoffs, TBDs, networks, final scores |
-| `cfbd:sync-rankings` | 1 | Every week's AP Top 25 for the season |
+| `cfbd:sync-rankings` | 1 | Every week's AP Top 25 and CFP rankings for the season |
 | `cfbd:sync-scoreboard` | 1 | Live status, score, period and clock |
 | `cfbd:spike` | ~9 | Checks provider data and the key's tier |
 
@@ -50,7 +50,7 @@ Defined in `routes/console.php`. Times are UTC. Page views read only from SQLite
 
 - Calendar and teams: weekly.
 - Full-season games: daily, to pick up kickoff time, TBD and TV changes (3 calls).
-- AP rankings: Sunday evening, plus Monday as a backup.
+- Rankings: Sunday evening for the AP poll, plus Monday as a backup, and Tuesday night (Wednesday 03:00 UTC) for the CFP rankings.
 - While a game is live or about to start:
   - **Free tier** (`CFBD_LIVE_SCOREBOARD=false`, the default): a one-call refresh of the current week's FBS games every `CFBD_SCORES_INTERVAL` minutes (default 10). Games show as live after kickoff, and final scores arrive within about 10 minutes. CFBD's `/games` has **no in-progress scores**.
   - **Tier 1+** (`CFBD_LIVE_SCOREBOARD=true`): `/scoreboard` every `CFBD_LIVE_INTERVAL` minutes (default 2) for live scores, period and clock. The full current-week refresh runs every 30 minutes.
@@ -61,7 +61,7 @@ A final game becomes read-only `CFBD_FREEZE_AFTER_HOURS` (default 36) hours afte
 
 These are rough figures. Check actual usage with `php artisan cfbd:spike`, which reports calls used and remaining.
 
-- **Free tier (1,000 calls/month):** about 25 calls a week for schedules and rankings, plus one call every 10 minutes while games are on. A typical week has about 14 hours of games on Saturday and a few hours on Thursday and Friday, which is about 135 calls. That's roughly 650–700 calls a month in season.
+- **Free tier (1,000 calls/month):** about 26 calls a week for schedules and rankings, plus one call every 10 minutes while games are on. A typical week has about 14 hours of games on Saturday and a few hours on Thursday and Friday, which is about 135 calls. That's roughly 650–700 calls a month in season.
 - **With the scoreboard at a 2-minute interval:** about 30 calls an hour during games, or roughly 700 on a full Saturday. Choose a tier whose monthly limit covers that. You can lengthen `CFBD_LIVE_INTERVAL` to reduce it.
 
 ## Routes

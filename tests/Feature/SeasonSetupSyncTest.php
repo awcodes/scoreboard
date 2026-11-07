@@ -37,15 +37,40 @@ it('syncs the season calendar', function (): void {
         ->and(SeasonWeek::where('season_type', SeasonType::Postseason)->count())->toBe(1);
 });
 
-it('stores only AP rankings, per week', function (): void {
+function withCfpRankings(): array
+{
+    $weeks = cfbdFixture('rankings');
+    $weeks[2]['polls'][] = ['poll' => 'Playoff Committee Rankings', 'isFinal' => null, 'ranks' => [
+        ['rank' => 2, 'teamId' => 61, 'school' => 'Georgia', 'conference' => 'SEC', 'firstPlaceVotes' => null, 'points' => null],
+    ]];
+
+    return $weeks;
+}
+
+it('stores AP and CFP rankings per week, ignoring other polls', function (): void {
+    Http::swap(new Factory);
+    fakeCfbd(['/rankings' => withCfpRankings()]);
     artisan('cfbd:sync-rankings', ['--season' => 2026])->assertSuccessful();
 
-    expect(TeamRanking::count())->toBe(9)
-        ->and(TeamRanking::pluck('poll')->unique()->all())->toBe([Poll::Ap]);
+    expect(TeamRanking::where('poll', Poll::Ap)->count())->toBe(9)
+        ->and(TeamRanking::where('poll', Poll::Cfp)->count())->toBe(1);
 
     $georgia = Team::firstWhere('provider_id', 61);
-    expect($georgia->rankings()->where('week', 2)->value('rank'))->toBe(5)
-        ->and($georgia->rankings()->where('week', 3)->value('rank'))->toBe(4);
+    expect($georgia->rankings()->where('poll', Poll::Ap)->where('week', 2)->value('rank'))->toBe(5)
+        ->and($georgia->rankings()->where('poll', Poll::Ap)->where('week', 3)->value('rank'))->toBe(4)
+        ->and($georgia->rankings()->where('poll', Poll::Cfp)->where('week', 3)->value('rank'))->toBe(2);
+});
+
+it('keeps stored CFP rankings when a response has none', function (): void {
+    Http::swap(new Factory);
+    fakeCfbd(['/rankings' => withCfpRankings()]);
+    artisan('cfbd:sync-rankings', ['--season' => 2026]);
+
+    Http::swap(new Factory);
+    fakeCfbd();
+    artisan('cfbd:sync-rankings', ['--season' => 2026]);
+
+    expect(TeamRanking::where('poll', Poll::Cfp)->count())->toBe(1);
 });
 
 it('keeps rankings when CFBD returns none', function (): void {

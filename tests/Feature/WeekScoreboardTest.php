@@ -19,9 +19,9 @@ beforeEach(function (): void {
     $this->week3 = SeasonWeek::factory()->week(3)->create();
 });
 
-function rank(Team $team, int $week, int $rank, SeasonType $type = SeasonType::Regular): void
+function rank(Team $team, int $week, int $rank, SeasonType $type = SeasonType::Regular, Poll $poll = Poll::Ap): void
 {
-    TeamRanking::create(['team_id' => $team->id, 'season' => 2026, 'season_type' => $type, 'week' => $week, 'poll' => Poll::Ap, 'rank' => $rank]);
+    TeamRanking::create(['team_id' => $team->id, 'season' => 2026, 'season_type' => $type, 'week' => $week, 'poll' => $poll, 'rank' => $rank]);
 }
 
 it('computes overall records through the viewed week', function (): void {
@@ -67,6 +67,29 @@ it('uses the last regular-season poll for the postseason', function (): void {
     rank($this->georgia, 1, 1, SeasonType::Postseason);
 
     expect((new WeekScoreboard($bowls))->rank($this->georgia->id))->toBe(2);
+});
+
+it('switches to the CFP rankings once one is released, without mixing in the AP poll', function (): void {
+    $week10 = SeasonWeek::factory()->week(10)->create();
+    $week11 = SeasonWeek::factory()->week(11)->create();
+    rank($this->georgia, 3, 3);
+    rank($this->georgia, 10, 2);
+    rank($this->tennessee, 10, 8);
+    rank($this->georgia, 11, 1);
+    rank($this->georgia, 10, 4, poll: Poll::Cfp);
+
+    expect((new WeekScoreboard($this->week3))->rank($this->georgia->id))->toBe(3)
+        ->and((new WeekScoreboard($week10))->rank($this->georgia->id))->toBe(4)
+        ->and((new WeekScoreboard($week10))->rank($this->tennessee->id))->toBeNull()
+        ->and((new WeekScoreboard($week11))->rank($this->georgia->id))->toBe(4);
+});
+
+it('uses the last regular-season CFP rankings for the postseason', function (): void {
+    $bowls = SeasonWeek::factory()->create(['season_type' => SeasonType::Postseason, 'week' => 1, 'starts_at' => '2026-12-13', 'ends_at' => '2027-01-20']);
+    rank($this->georgia, 15, 2);
+    rank($this->georgia, 15, 3, poll: Poll::Cfp);
+
+    expect((new WeekScoreboard($bowls))->rank($this->georgia->id))->toBe(3);
 });
 
 it('includes FBS vs FCS games and excludes games without an FBS team', function (): void {

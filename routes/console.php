@@ -26,6 +26,8 @@ Schedule::command('cfbd:sync-games')->dailyAt('10:00')->withoutOverlapping(30);
 // The AP poll is released Sunday afternoon Eastern; Monday is a safety net.
 Schedule::command('cfbd:sync-rankings')->sundays()->at('20:00')->withoutOverlapping(30);
 Schedule::command('cfbd:sync-rankings')->mondays()->at('12:00')->withoutOverlapping(30);
+// The CFP committee rankings come out Tuesday evening Eastern from early November.
+Schedule::command('cfbd:sync-rankings')->wednesdays()->at('03:00')->withoutOverlapping(30);
 
 if (config('services.cfbd.live_scoreboard')) {
     // Live status, score, period and clock (1 call).

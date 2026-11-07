@@ -1,6 +1,6 @@
 # College Football Scoreboard
 
-A small, personal Laravel app that shows **every NCAA Division I FBS game in a week**: scores, live state, kickoff times, TV, records and AP rankings. The full brief is `college-football-scoreboard-spec.md`. Provider findings are in `docs/cfbd-provider-notes.md`.
+A small, personal Laravel app that shows **every NCAA Division I FBS game in a week**: scores, live state, kickoff times, TV, records and rankings. The full brief is `college-football-scoreboard-spec.md`. Provider findings are in `docs/cfbd-provider-notes.md`.
 
 Before adding anything, ask: *does this make it easier to see what happened in college football this week?* If not, it probably doesn't belong.
 
@@ -11,7 +11,7 @@ Before adding anything, ask: *does this make it easier to see what happened in c
 - Games are ordered chronologically by kickoff. TBD kickoffs go last on their day, and the provider id breaks ties. Never move ranked games up.
 - Show FBS vs. FCS games. Hide games that have no FBS team (`Game::scopeFbs`).
 - Team rows are always `Team Name (Record) #Rank ... Score`. The team name is leftmost; the rank comes after the record and only when the team is ranked. Never reserve space for a rank or indent ranked teams.
-- The AP Top 25 is the only scoreboard ranking. `#4` implicitly means AP #4. Don't switch to CFP rankings mid-season.
+- Each week shows one ranking: the CFP committee rankings once one has been released for that week or earlier, otherwise the AP Top 25. Never mix the two in one week or show both.
 - Keep it deliberately small. Don't add accounts or auth, social features, news, betting, fantasy, ads, notifications, an admin panel, a public API, Redis or elaborate caching unless the developer asks.
 
 ## Data flow
@@ -28,7 +28,7 @@ CFBD API → app/Cfbd/CfbdClient → app/Cfbd/Data DTOs → app/Sync/* → Eloqu
 
 ## Domain rules
 
-- **Rankings belong to a season and week, never to the team.** The week N view uses the latest AP poll numbered ≤ N (CFBD poll N = the ranking going into week N; week 1 = preseason). Postseason views use the last regular-season poll.
+- **Rankings belong to a season and week, never to the team.** The week N view uses the latest CFP release numbered ≤ N, falling back to the latest AP poll numbered ≤ N (CFBD numbers each release by the week it precedes; AP week 1 = preseason, CFP starts around week 10). Postseason views use the last regular-season release.
 - **Records are calculated** from stored final games through the viewed week (`WeekScoreboard::loadRecords`), not from CFBD's `/records`, which only gives current totals. Show the overall record only.
 - Game conference and classification are stored per game, because teams realign. Don't read the team's current conference for historical games.
 - Week date ranges come from actual FBS kickoffs (`season_weeks.first_game_at`/`last_game_at`, filled by the games sync). CFBD's calendar game-time fields are just the week's boundaries.
