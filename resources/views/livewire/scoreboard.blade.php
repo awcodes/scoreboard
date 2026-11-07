@@ -81,10 +81,28 @@
                             ])
                         >{{ $name }}</a>
                     @endforeach
+
+                    <span class="border-line mx-1 my-2 border-l" aria-hidden="true"></span>
+
+                    <a
+                        href="{{ $this->top25Url() }}"
+                        wire:click.prevent="$toggle('top25')"
+                        aria-pressed="{{ $top25 ? 'true' : 'false' }}"
+                        role="button"
+                        @class([
+                            'rounded px-2 py-1.5 text-sm whitespace-nowrap',
+                            'font-semibold text-fg underline decoration-2 underline-offset-[6px]' => $top25,
+                            'text-muted hover:text-fg' => ! $top25,
+                        ])
+                    >Top 25</a>
                 </nav>
 
                 @if ($status !== 'all')
                     <input type="hidden" name="status" value="{{ $status }}" />
+                @endif
+
+                @if ($top25)
+                    <input type="hidden" name="top25" value="1" />
                 @endif
 
                 <div class="flex w-full items-center gap-2 sm:w-auto">

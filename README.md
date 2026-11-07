@@ -1,6 +1,6 @@
 # College Football Scoreboard
 
-Every NCAA Division I FBS game for a week, all on one page: scores, live state, kickoff times, TV, records and rankings (AP Top 25, then the CFP committee rankings once they're released). Rankings never affect which games are shown or their order. See `college-football-scoreboard-spec.md` for the full brief.
+Every NCAA Division I FBS game for a week, all on one page: scores, live state, kickoff times, TV, records and rankings (AP Top 25, then the CFP committee rankings once they're released). Rankings never affect the order of games, and only hide games when you turn on the opt-in Top 25 filter. See `college-football-scoreboard-spec.md` for the full brief.
 
 Laravel 13, Livewire 4, Tailwind 4, SQLite, with data from [CollegeFootballData](https://collegefootballdata.com) (CFBD).
 
@@ -69,7 +69,7 @@ These are rough figures. Check actual usage with `php artisan cfbd:spike`, which
 - `/`: the current week
 - `/2026/3`: regular-season week 3
 - `/2026/post`: the postseason
-- Filters and team search are query strings (`?status=live&conference=SEC&q=georgia`), so every view can be shared and works without JavaScript.
+- Filters and team search are query strings (`?status=live&top25=1&conference=SEC&q=georgia`), so every view can be shared and works without JavaScript.
 
 ## Tests and code quality
 

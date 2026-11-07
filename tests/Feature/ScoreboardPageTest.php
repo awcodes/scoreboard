@@ -82,6 +82,25 @@ it('filters by status and conference', function (): void {
         ->assertSeeText('1 live · 2 final');
 });
 
+it('narrows to games with a ranked team when Top 25 is on, keeping the week summary', function (): void {
+    Livewire::test(Scoreboard::class, ['season' => 2026, 'week' => '3'])
+        ->assertSeeText('Georgia Southern')
+        ->toggle('top25')
+        ->assertSeeText('Tennessee')
+        ->assertSeeText('Austin Peay')
+        ->assertDontSeeText('Georgia Southern')
+        ->assertSeeText('1 live · 2 final')
+        ->set('status', 'live')
+        ->assertSeeText('Austin Peay')
+        ->assertDontSeeText('Tennessee');
+
+    get('/2026/3?top25=1')
+        ->assertDontSeeText('Georgia Southern')
+        ->assertSee('aria-pressed="true"', false)
+        ->assertSee('href="'.url('/2026/2').'?top25=1"', false)
+        ->assertSee('href="'.url('/2026/3').'"', false);
+});
+
 it('applies filters from the query string without JavaScript', function (): void {
     get('/2026/3?status=final&conference=SEC')
         ->assertSeeText('Tennessee')

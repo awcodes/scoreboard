@@ -36,6 +36,9 @@ final class Scoreboard extends Component
     #[Url(as: 'q', except: '')]
     public string $search = '';
 
+    #[Url(except: false)]
+    public bool $top25 = false;
+
     public function mount(?int $season = null, ?string $week = null): void
     {
         $seasonWeek = $season === null
@@ -78,6 +81,7 @@ final class Scoreboard extends Component
             GameStatus::tryFrom($this->statusFilterValue()),
             in_array($this->conference, $this->board->conferences(), true) ? $this->conference : null,
             $this->search,
+            $this->top25,
         ) ?? collect();
     }
 
@@ -107,6 +111,14 @@ final class Scoreboard extends Component
     }
 
     /**
+     * Current view with the Top 25 filter flipped, keeping the other filters.
+     */
+    public function top25Url(): string
+    {
+        return ($this->week?->url() ?? url('/')).$this->queryString(['top25' => $this->top25 ? '' : '1']);
+    }
+
+    /**
      * Current view with the team search removed, keeping the other filters.
      */
     public function clearSearchUrl(): string
@@ -133,7 +145,7 @@ final class Scoreboard extends Component
     private function queryString(array $overrides = []): string
     {
         $query = array_filter(
-            array_merge(['status' => $this->status, 'conference' => $this->conference, 'q' => mb_trim($this->search)], $overrides),
+            array_merge(['status' => $this->status, 'top25' => $this->top25 ? '1' : '', 'conference' => $this->conference, 'q' => mb_trim($this->search)], $overrides),
             fn ($value, $key): bool => $value !== '' && ($key !== 'status' || $value !== 'all'),
             ARRAY_FILTER_USE_BOTH,
         );

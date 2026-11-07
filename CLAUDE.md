@@ -9,8 +9,8 @@ Before adding anything, ask: *does this make it easier to see what happened in c
 
 ## Product rules (non-negotiable)
 
-- Every FBS game matters equally. **Rankings, popularity or "importance" must never decide which games are shown, hidden or ordered.** No Top 25 default view, featured games or editorial prioritization.
-- The complete week is the product. `All` is the default. Filters (status, conference, team search) narrow the view but never change the underlying week, and the summary counts always cover the whole week.
+- Every FBS game matters equally. **Rankings, popularity or "importance" must never decide which games are shown, hidden or ordered** — the one exception is the opt-in `Top 25` filter (`?top25=1`), which the viewer turns on themselves. It is never the default, never reorders games, and uses the same ranking the rows show. No featured games or editorial prioritization.
+- The complete week is the product. `All` is the default. Filters (status, Top 25, conference, team search) narrow the view but never change the underlying week, and the summary counts always cover the whole week.
 - Games are ordered chronologically by kickoff. TBD kickoffs go last on their day, and the provider id breaks ties. Never move ranked games up.
 - Show FBS vs. FCS games. Hide games that have no FBS team (`Game::scopeFbs`).
 - Team rows are always `Team Name (Record) #Rank ... Score`. The team name is leftmost; the rank comes after the record and only when the team is ranked. Never reserve space for a rank or indent ranked teams.
@@ -48,7 +48,7 @@ CFBD API → app/Cfbd/CfbdClient → app/Cfbd/Data DTOs → app/Sync/* → Eloqu
 - Utility dashboard, not a sports media site: dark mode first, dense rows, strong score hierarchy, subtle separators, 1/2/3 responsive columns. No giant cards, big logos, gradients, hero sections or unnecessary animation.
 - Colors are theme tokens in `resources/css/app.css` (`bg-page`, `text-fg`, `text-muted`, `text-faint`, `border-line`, `text-rank`, `text-live`). Use them instead of raw Tailwind colors.
 - Game state must never rely on color alone (live games include "Live" text for screen readers). Controls must be keyboard-accessible, with visible focus.
-- Routes stay simple and shareable: `/`, `/{season}/{week}` (`/2026/3`, `/2026/post`). Filters are query strings (`status`, `conference`, `q`) that work without JavaScript. Week links use `wire:navigate` and carry the active filters.
+- Routes stay simple and shareable: `/`, `/{season}/{week}` (`/2026/3`, `/2026/post`). Filters are query strings (`status`, `top25`, `conference`, `q`) that work without JavaScript. Week links use `wire:navigate` and carry the active filters.
 - It must be comfortable on an iPhone. Check narrow widths (down to about 320px) for wrapping or overflow.
 
 ## Testing
@@ -66,7 +66,7 @@ CFBD API → app/Cfbd/CfbdClient → app/Cfbd/Data DTOs → app/Sync/* → Eloqu
 
 ## Phase 2 (not until the developer asks)
 
-Team pages (`/team/georgia`), favorites stored in the browser ("My Teams"), a network filter and a PWA. A "featured games" filter was discussed and deferred because it conflicts with the product rules above.
+Team pages (`/team/georgia`), favorites stored in the browser ("My Teams"), a network filter and a PWA. A "featured games" filter was discussed and deferred because it conflicts with the product rules above (the opt-in Top 25 filter is the agreed exception).
 
 === foundation rules ===
 

@@ -16,8 +16,8 @@ use Illuminate\Support\Str;
 
 /**
  * Every FBS game in a week, in kickoff order, with each team's record and
- * AP rank as of that week. Rankings are context only: they never affect
- * which games appear or their order.
+ * rank as of that week. Rankings never affect the order, and only hide
+ * games when the viewer opts into the Top 25 filter.
  */
 final class WeekScoreboard
 {
@@ -27,7 +27,7 @@ final class WeekScoreboard
     /** @var array<int, string> team id => "3-0" */
     private array $records;
 
-    /** @var array<int, int> team id => AP rank */
+    /** @var array<int, int> team id => rank */
     private array $ranks;
 
     public function __construct(public readonly SeasonWeek $week)
@@ -95,16 +95,20 @@ final class WeekScoreboard
     }
 
     /**
-     * Filtering narrows the view only; the underlying week is unchanged.
+     * Filtering narrows the view only; the underlying week and its order are
+     * unchanged. `$rankedOnly` keeps games with a team ranked this week.
      *
      * @return Collection<int, Game>
      */
-    public function filtered(?GameStatus $status = null, ?string $conference = null, ?string $search = null): Collection
+    public function filtered(?GameStatus $status = null, ?string $conference = null, ?string $search = null, bool $rankedOnly = false): Collection
     {
         $search = $this->normalize((string) $search);
 
         return $this->games
             ->when($status, fn (Collection $games) => $games->where('status', $status))
+            ->when($rankedOnly, fn (Collection $games) => $games->filter(
+                fn (Game $g): bool => $this->rank($g->home_team_id) !== null || $this->rank($g->away_team_id) !== null
+            ))
             ->when($conference, fn (Collection $games) => $games->filter(
                 fn (Game $g): bool => $g->home_conference === $conference || $g->away_conference === $conference
             ))
